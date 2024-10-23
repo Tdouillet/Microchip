@@ -6,15 +6,19 @@
             <name>DAPII_LIDAR_PIC18</name>
             <creation-uuid>a926999e-08fe-470c-8908-f01bfdba9854</creation-uuid>
             <make-project-type>0</make-project-type>
+            <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>APPLICATION</sourceRootElem>
+                <sourceRootElem>DRIVERS</sourceRootElem>
+                <sourceRootElem>HARDWARE</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>
                     <type>2</type>
                 </confElem>
             </confList>
-            <sourceEncoding>UTF-8</sourceEncoding>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
             </formatting>
