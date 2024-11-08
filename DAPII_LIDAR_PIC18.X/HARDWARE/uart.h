@@ -86,4 +86,4 @@ void UART_Init(void);
 
 void UART_WriteByte(uint8_t port, uint8_t byte);
 
-void UART_Write(uint8_t port, uint8_t buf[], uint8_t buf_size);
+void UART_Write(uint8_t port, uint8_t * buf, uint8_t buf_size);

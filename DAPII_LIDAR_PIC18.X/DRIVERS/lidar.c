@@ -25,60 +25,70 @@ static const uint8_t soft_restart_buf[] = {0xA5,0x40};
 
 void LIDAR_StartScan(void){
     
-    UART_Write(LIDAR_PORT, start_scan_buf, BUFFER_SIZE);
+    uint8_t * pointeur = start_scan_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_StopScan(void){
     
-    UART_Write(LIDAR_PORT, stop_scan_buf, BUFFER_SIZE);
+    uint8_t * pointeur = stop_scan_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_GetInfo(void){
     
-    UART_Write(LIDAR_PORT, get_info_buf, BUFFER_SIZE);
+    uint8_t * pointeur = get_info_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_GetStatus(void){
     
-    UART_Write(LIDAR_PORT, get_status_buf, BUFFER_SIZE);
+    uint8_t * pointeur = get_status_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_Increase100mHz(void){
     
-    UART_Write(LIDAR_PORT, inc_100mHz_buf, BUFFER_SIZE);
+    uint8_t * pointeur = inc_100mHz_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_Decrease100mHz(void){
     
-    UART_Write(LIDAR_PORT, dec_100mHz_buf, BUFFER_SIZE);
+    uint8_t * pointeur = dec_100mHz_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_Increase1Hz(void){
     
-    UART_Write(LIDAR_PORT, inc_1Hz_buf, BUFFER_SIZE);
+    uint8_t * pointeur = inc_1Hz_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_Decrease1Hz(void){
     
-    UART_Write(LIDAR_PORT, dec_1Hz_buf, BUFFER_SIZE);
+    uint8_t * pointeur = dec_1Hz_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_GetFrequency(void){
     
-    UART_Write(LIDAR_PORT, get_freq_buf, BUFFER_SIZE);
+    uint8_t * pointeur = get_freq_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
 
 void LIDAR_Restart(void){
     
-    UART_Write(LIDAR_PORT, soft_restart_buf, BUFFER_SIZE);
+    uint8_t * pointeur = soft_restart_buf;
+    UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
     
 }
