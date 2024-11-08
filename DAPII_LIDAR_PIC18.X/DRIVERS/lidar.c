@@ -7,7 +7,78 @@
 
 
 #include <xc.h>
+#include "../HARDWARE/uart.h"
 
-void main(void) {
-    return;
+#define LIDAR_PORT 1
+#define BUFFER_SIZE 2
+
+static const uint8_t start_scan_buf[]   = {0xA5,0x60};
+static const uint8_t stop_scan_buf[]    = {0xA5,0x65};
+static const uint8_t get_info_buf[]     = {0xA5,0x90};
+static const uint8_t get_status_buf[]   = {0xA5,0x92};
+static const uint8_t inc_100mHz_buf[]   = {0xA5,0x09};
+static const uint8_t dec_100mHz_buf[]   = {0xA5,0x0A};
+static const uint8_t inc_1Hz_buf[]      = {0xA5,0x0B};
+static const uint8_t dec_1Hz_buf[]      = {0xA5,0x0C};
+static const uint8_t get_freq_buf[]     = {0xA5,0x0D};
+static const uint8_t soft_restart_buf[] = {0xA5,0x40};
+
+void LIDAR_StartScan(void){
+    
+    UART_Write(LIDAR_PORT, start_scan_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_StopScan(void){
+    
+    UART_Write(LIDAR_PORT, stop_scan_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_GetInfo(void){
+    
+    UART_Write(LIDAR_PORT, get_info_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_GetStatus(void){
+    
+    UART_Write(LIDAR_PORT, get_status_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Increase100mHz(void){
+    
+    UART_Write(LIDAR_PORT, inc_100mHz_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Decrease100mHz(void){
+    
+    UART_Write(LIDAR_PORT, dec_100mHz_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Increase1Hz(void){
+    
+    UART_Write(LIDAR_PORT, inc_1Hz_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Decrease1Hz(void){
+    
+    UART_Write(LIDAR_PORT, dec_1Hz_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_GetFrequency(void){
+    
+    UART_Write(LIDAR_PORT, get_freq_buf, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Restart(void){
+    
+    UART_Write(LIDAR_PORT, soft_restart_buf, BUFFER_SIZE);
+    
 }

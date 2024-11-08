@@ -4,6 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>HARDWARE/device_config.h</itemPath>
+      <itemPath>HARDWARE/mcc.h</itemPath>
+      <itemPath>HARDWARE/pin_manager.h</itemPath>
+      <itemPath>HARDWARE/uart.h</itemPath>
+      <itemPath>DRIVERS/lidar.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -12,14 +17,18 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>APPLICATION/app.c</itemPath>
+      <itemPath>HARDWARE/device_config.c</itemPath>
+      <itemPath>HARDWARE/mcc.c</itemPath>
+      <itemPath>HARDWARE/pin_manager.c</itemPath>
+      <itemPath>APPLICATION/main.c</itemPath>
+      <itemPath>HARDWARE/uart.c</itemPath>
       <itemPath>DRIVERS/lidar.c</itemPath>
-      <itemPath>HARDWARE/UART_LIDAR.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
+      <itemPath>DAPII_LIDAR_PIC18.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -32,16 +41,16 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F47Q10</targetDevice>
+        <targetDevice>PIC18F57Q43</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.50</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.17.379"/>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.24.430"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

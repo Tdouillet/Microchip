@@ -34,4 +34,4 @@ MP_CC_DIR="C:\Program Files\Microchip\xc8\v2.50\bin"
 MP_AS_DIR="C:\Program Files\Microchip\xc8\v2.50\bin"
 MP_LD_DIR="C:\Program Files\Microchip\xc8\v2.50\bin"
 MP_AR_DIR="C:\Program Files\Microchip\xc8\v2.50\bin"
-DFP_DIR=C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC18F-Q_DFP/1.17.379
+DFP_DIR=C:/Users/thiba/.mchp_packs/Microchip/PIC18F-Q_DFP/1.24.430

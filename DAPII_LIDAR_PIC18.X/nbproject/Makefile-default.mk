@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=APPLICATION/app.c DRIVERS/lidar.c HARDWARE/UART_LIDAR.c
+SOURCEFILES_QUOTED_IF_SPACED=HARDWARE/device_config.c HARDWARE/mcc.c HARDWARE/pin_manager.c APPLICATION/main.c HARDWARE/uart.c DRIVERS/lidar.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/APPLICATION/app.p1 ${OBJECTDIR}/DRIVERS/lidar.p1 ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/APPLICATION/app.p1.d ${OBJECTDIR}/DRIVERS/lidar.p1.d ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/HARDWARE/device_config.p1 ${OBJECTDIR}/HARDWARE/mcc.p1 ${OBJECTDIR}/HARDWARE/pin_manager.p1 ${OBJECTDIR}/APPLICATION/main.p1 ${OBJECTDIR}/HARDWARE/uart.p1 ${OBJECTDIR}/DRIVERS/lidar.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/HARDWARE/device_config.p1.d ${OBJECTDIR}/HARDWARE/mcc.p1.d ${OBJECTDIR}/HARDWARE/pin_manager.p1.d ${OBJECTDIR}/APPLICATION/main.p1.d ${OBJECTDIR}/HARDWARE/uart.p1.d ${OBJECTDIR}/DRIVERS/lidar.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/APPLICATION/app.p1 ${OBJECTDIR}/DRIVERS/lidar.p1 ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1
+OBJECTFILES=${OBJECTDIR}/HARDWARE/device_config.p1 ${OBJECTDIR}/HARDWARE/mcc.p1 ${OBJECTDIR}/HARDWARE/pin_manager.p1 ${OBJECTDIR}/APPLICATION/main.p1 ${OBJECTDIR}/HARDWARE/uart.p1 ${OBJECTDIR}/DRIVERS/lidar.p1
 
 # Source Files
-SOURCEFILES=APPLICATION/app.c DRIVERS/lidar.c HARDWARE/UART_LIDAR.c
+SOURCEFILES=HARDWARE/device_config.c HARDWARE/mcc.c HARDWARE/pin_manager.c APPLICATION/main.c HARDWARE/uart.c DRIVERS/lidar.c
 
 
 
@@ -84,17 +84,49 @@ ifneq ($(INFORMATION_MESSAGE), )
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/DAPII_LIDAR_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=18F47Q10
+MP_PROCESSOR_OPTION=18F57Q43
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/APPLICATION/app.p1: APPLICATION/app.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/HARDWARE/device_config.p1: HARDWARE/device_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/device_config.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/device_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/device_config.p1 HARDWARE/device_config.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/device_config.d ${OBJECTDIR}/HARDWARE/device_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/device_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/mcc.p1: HARDWARE/mcc.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/mcc.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/mcc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/mcc.p1 HARDWARE/mcc.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/mcc.d ${OBJECTDIR}/HARDWARE/mcc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/mcc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/pin_manager.p1: HARDWARE/pin_manager.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/pin_manager.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/pin_manager.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/pin_manager.p1 HARDWARE/pin_manager.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/pin_manager.d ${OBJECTDIR}/HARDWARE/pin_manager.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/pin_manager.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/APPLICATION/main.p1: APPLICATION/main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/APPLICATION" 
-	@${RM} ${OBJECTDIR}/APPLICATION/app.p1.d 
-	@${RM} ${OBJECTDIR}/APPLICATION/app.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/APPLICATION/app.p1 APPLICATION/app.c 
-	@-${MV} ${OBJECTDIR}/APPLICATION/app.d ${OBJECTDIR}/APPLICATION/app.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/APPLICATION/app.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/APPLICATION/main.p1.d 
+	@${RM} ${OBJECTDIR}/APPLICATION/main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/APPLICATION/main.p1 APPLICATION/main.c 
+	@-${MV} ${OBJECTDIR}/APPLICATION/main.d ${OBJECTDIR}/APPLICATION/main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/APPLICATION/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/uart.p1: HARDWARE/uart.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/uart.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/uart.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/uart.p1 HARDWARE/uart.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/uart.d ${OBJECTDIR}/HARDWARE/uart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/DRIVERS/lidar.p1: DRIVERS/lidar.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/DRIVERS" 
@@ -104,22 +136,46 @@ ${OBJECTDIR}/DRIVERS/lidar.p1: DRIVERS/lidar.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/DRIVERS/lidar.d ${OBJECTDIR}/DRIVERS/lidar.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DRIVERS/lidar.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/HARDWARE/UART_LIDAR.p1: HARDWARE/UART_LIDAR.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
-	@${RM} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d 
-	@${RM} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1 HARDWARE/UART_LIDAR.c 
-	@-${MV} ${OBJECTDIR}/HARDWARE/UART_LIDAR.d ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 else
-${OBJECTDIR}/APPLICATION/app.p1: APPLICATION/app.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/HARDWARE/device_config.p1: HARDWARE/device_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/device_config.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/device_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/device_config.p1 HARDWARE/device_config.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/device_config.d ${OBJECTDIR}/HARDWARE/device_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/device_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/mcc.p1: HARDWARE/mcc.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/mcc.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/mcc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/mcc.p1 HARDWARE/mcc.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/mcc.d ${OBJECTDIR}/HARDWARE/mcc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/mcc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/pin_manager.p1: HARDWARE/pin_manager.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/pin_manager.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/pin_manager.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/pin_manager.p1 HARDWARE/pin_manager.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/pin_manager.d ${OBJECTDIR}/HARDWARE/pin_manager.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/pin_manager.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/APPLICATION/main.p1: APPLICATION/main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/APPLICATION" 
-	@${RM} ${OBJECTDIR}/APPLICATION/app.p1.d 
-	@${RM} ${OBJECTDIR}/APPLICATION/app.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/APPLICATION/app.p1 APPLICATION/app.c 
-	@-${MV} ${OBJECTDIR}/APPLICATION/app.d ${OBJECTDIR}/APPLICATION/app.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/APPLICATION/app.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/APPLICATION/main.p1.d 
+	@${RM} ${OBJECTDIR}/APPLICATION/main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/APPLICATION/main.p1 APPLICATION/main.c 
+	@-${MV} ${OBJECTDIR}/APPLICATION/main.d ${OBJECTDIR}/APPLICATION/main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/APPLICATION/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/HARDWARE/uart.p1: HARDWARE/uart.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
+	@${RM} ${OBJECTDIR}/HARDWARE/uart.p1.d 
+	@${RM} ${OBJECTDIR}/HARDWARE/uart.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/uart.p1 HARDWARE/uart.c 
+	@-${MV} ${OBJECTDIR}/HARDWARE/uart.d ${OBJECTDIR}/HARDWARE/uart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/DRIVERS/lidar.p1: DRIVERS/lidar.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/DRIVERS" 
@@ -128,14 +184,6 @@ ${OBJECTDIR}/DRIVERS/lidar.p1: DRIVERS/lidar.c  nbproject/Makefile-${CND_CONF}.m
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/DRIVERS/lidar.p1 DRIVERS/lidar.c 
 	@-${MV} ${OBJECTDIR}/DRIVERS/lidar.d ${OBJECTDIR}/DRIVERS/lidar.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DRIVERS/lidar.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/HARDWARE/UART_LIDAR.p1: HARDWARE/UART_LIDAR.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/HARDWARE" 
-	@${RM} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d 
-	@${RM} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1 HARDWARE/UART_LIDAR.c 
-	@-${MV} ${OBJECTDIR}/HARDWARE/UART_LIDAR.d ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/HARDWARE/UART_LIDAR.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
