@@ -46,11 +46,11 @@
 
 #include "mcc.h"
 #include "uart.h"
-#define _XTAL_FREQ 48000000UL
 
 
 void SYSTEM_Initialize(void)
 {
+    INTCON0bits.IPEN = 0;
     PMD_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();

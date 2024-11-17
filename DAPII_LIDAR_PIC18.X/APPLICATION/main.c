@@ -40,13 +40,17 @@
     OF FEES, IF ANY, THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS 
     SOFTWARE.
 */
-
+#include <xc.h>
 #include "../HARDWARE/mcc.h"
 #include "../DRIVERS/lidar.h"
+#include "../HARDWARE/uart.h"
 
 /*
                          Main application
  */
+uint8_t rx_buffer[1000];
+uint8_t value = 0;
+
 void main(void)
 {
     // Initialize the device
@@ -62,31 +66,19 @@ void main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
-    LIDAR_StartScan();
-    __delay_ms(1);
-
+    
+    //uint8_t value = 0;
+    LIDAR_Init();
+    Nop();
     while (1)
     {
         
         
-//        LIDAR_StopScan();
-//        __delay_ms(1);
-        LIDAR_GetInfo();
-        __delay_ms(1);
-        LIDAR_GetStatus();
-        __delay_ms(1);
-//        LIDAR_Increase100mHz();
-//        __delay_ms(1);
-//        LIDAR_Decrease100mHz();
-//        __delay_ms(1);
-//        LIDAR_Increase1Hz();
-//        __delay_ms(1);
-//        LIDAR_Decrease1Hz();
-//        __delay_ms(1);
-        LIDAR_GetFrequency();
-        __delay_ms(1);
-//        LIDAR_Restart();
-//        __delay_ms(1);
+        __delay_ms(1000);
+        value = rx_buffer[0];
+        //LIDAR_StopScan();
+        Nop();
+        
     }
 }
 /**

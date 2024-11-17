@@ -8,10 +8,14 @@
 
 #include <xc.h>
 #include "../HARDWARE/uart.h"
+#include "../HARDWARE/device_config.h"
 
 #define LIDAR_PORT 1
 #define BUFFER_SIZE 2
 
+#define MAX_RX_SIZE 1000
+
+static const uint8_t init_buf[]         = {0xA5,0x00};
 static const uint8_t start_scan_buf[]   = {0xA5,0x60};
 static const uint8_t stop_scan_buf[]    = {0xA5,0x65};
 static const uint8_t get_info_buf[]     = {0xA5,0x90};
@@ -23,10 +27,30 @@ static const uint8_t dec_1Hz_buf[]      = {0xA5,0x0C};
 static const uint8_t get_freq_buf[]     = {0xA5,0x0D};
 static const uint8_t soft_restart_buf[] = {0xA5,0x40};
 
+uint8_t data_buffer[MAX_RX_SIZE];
+
 void LIDAR_StartScan(void){
     
     uint8_t * pointeur = start_scan_buf;
     UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Init(void){
+    
+    uint8_t * start_ptr = start_scan_buf;
+    uint8_t * init_ptr = init_buf;
+    uint8_t * stop_ptr = stop_scan_buf;
+    
+    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
+    __delay_ms(6);
+    UART_Write(LIDAR_PORT, stop_ptr, BUFFER_SIZE);
+    __delay_ms(500);
+    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
+    __delay_ms(6);
+    UART_Write(LIDAR_PORT, stop_ptr, BUFFER_SIZE);
+    __delay_ms(500);
+    UART_Write(LIDAR_PORT, start_ptr, BUFFER_SIZE);
     
 }
 

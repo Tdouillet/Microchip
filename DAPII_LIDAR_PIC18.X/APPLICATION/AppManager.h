@@ -1,4 +1,4 @@
-/* Microchip Technology Inc. and its subsidiaries.  You may use this software 
+ /* Microchip Technology Inc. and its subsidiaries.  You may use this software 
  * and any derivatives exclusively with Microchip products. 
  * 
  * THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS".  NO WARRANTIES, WHETHER 
@@ -76,20 +76,3 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
-
-
-void (*UART_RxInterruptHandler)(void);
-
-void UART_SetBaudRate(uint8_t port, uint8_t value);
-
-void UART_Enable(void);
-
-void UART_Disable(void);
-
-void UART_WriteByte(uint8_t port, uint8_t byte);
-
-void UART_Write(uint8_t port, uint8_t * buf, uint8_t buf_size);
-
-void UART_Init(void);
-
-void UART_Read(uint8_t * buffer);

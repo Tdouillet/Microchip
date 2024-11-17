@@ -32,6 +32,8 @@
 #define	XC_HEADER_TEMPLATE_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
+#include <stdint.h>
+#include <stdbool.h>
 
 // TODO Insert appropriate #include <>
 
@@ -76,20 +78,6 @@ extern "C" {
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
+typedef void(*UART_Rx_Callback)(void);
 
-
-void (*UART_RxInterruptHandler)(void);
-
-void UART_SetBaudRate(uint8_t port, uint8_t value);
-
-void UART_Enable(void);
-
-void UART_Disable(void);
-
-void UART_WriteByte(uint8_t port, uint8_t byte);
-
-void UART_Write(uint8_t port, uint8_t * buf, uint8_t buf_size);
-
-void UART_Init(void);
-
-void UART_Read(uint8_t * buffer);
+uint8_t UART_Rx_SetInterruptHandler(UART_Rx_Callback Callback_function);

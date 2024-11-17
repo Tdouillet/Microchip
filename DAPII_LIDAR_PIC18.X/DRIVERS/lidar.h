@@ -78,6 +78,8 @@ extern "C" {
 
 void LIDAR_StartScan(void);
 
+void LIDAR_Init(void);
+
 void LIDAR_StopScan(void);
 
 void LIDAR_GetInfo(void);
