@@ -46,6 +46,8 @@
 
 #include "mcc.h"
 #include "uart.h"
+#include "LED.h"
+#include "ISR.h"
 
 
 void SYSTEM_Initialize(void)
@@ -54,19 +56,21 @@ void SYSTEM_Initialize(void)
     PMD_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
+    Interrupts_Init();
+    LED_Init();
     UART_Init();
 }
 
 void OSCILLATOR_Initialize(void)
 {
-    // NOSC HFINTOSC; NDIV 2; 
-    OSCCON1 = 0x61;
+    // NOSC HFINTOSC; NDIV 1; 
+    OSCCON1 = 0x60;
     // CSWHOLD may proceed; SOSCPWR Low power; 
     OSCCON3 = 0x00;
     // MFOEN disabled; LFOEN disabled; ADOEN disabled; SOSCEN disabled; EXTOEN disabled; HFOEN disabled; 
     OSCEN = 0x00;
-    // HFFRQ 48_MHz; 
-    OSCFRQ = 0x07;
+    // HFFRQ 64_MHz; 
+    OSCFRQ = 0x08;
     // TUN 0; 
     OSCTUNE = 0x00;
     // ACTUD enabled; ACTEN disabled; 

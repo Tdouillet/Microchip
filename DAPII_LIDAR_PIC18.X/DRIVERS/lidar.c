@@ -1,16 +1,6 @@
-/*
- * File:   lidar.c
- * Author: thiba
- *
- * Created on 23 octobre 2024, 14:57
- */
+#include "lidar.h"
 
-
-#include <xc.h>
-#include "../HARDWARE/uart.h"
-#include "../HARDWARE/device_config.h"
-
-#define LIDAR_PORT 1
+#define LIDAR_PORT 2
 #define BUFFER_SIZE 2
 
 #define MAX_RX_SIZE 1000
@@ -36,23 +26,7 @@ void LIDAR_StartScan(void){
     
 }
 
-void LIDAR_Init(void){
-    
-    uint8_t * start_ptr = start_scan_buf;
-    uint8_t * init_ptr = init_buf;
-    uint8_t * stop_ptr = stop_scan_buf;
-    
-    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
-    __delay_ms(6);
-    UART_Write(LIDAR_PORT, stop_ptr, BUFFER_SIZE);
-    __delay_ms(500);
-    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
-    __delay_ms(6);
-    UART_Write(LIDAR_PORT, stop_ptr, BUFFER_SIZE);
-    __delay_ms(500);
-    UART_Write(LIDAR_PORT, start_ptr, BUFFER_SIZE);
-    
-}
+
 
 void LIDAR_StopScan(void){
     
@@ -114,5 +88,27 @@ void LIDAR_Restart(void){
     
     uint8_t * pointeur = soft_restart_buf;
     UART_Write(LIDAR_PORT, pointeur, BUFFER_SIZE);
+    
+}
+
+void LIDAR_Init(void){
+    
+    uint8_t * init_ptr = init_buf;
+    
+    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
+    __delay_ms(6);
+    LIDAR_StopScan();
+    __delay_ms(500);
+    UART_Write(LIDAR_PORT, init_ptr, BUFFER_SIZE);
+    __delay_ms(6);
+    LIDAR_StopScan();
+    __delay_ms(500);
+    LIDAR_StartScan();
+    
+}
+
+void LIDAR_Set_Init(void){
+    
+    DEVICE_Set_Init(LIDAR_Init);
     
 }

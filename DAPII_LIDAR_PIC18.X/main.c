@@ -44,7 +44,6 @@
 #include "../HARDWARE/mcc.h"
 #include "../DRIVERS/lidar.h"
 #include "../HARDWARE/uart.h"
-#include "../HARDWARE/LED.h"
 
 /*
                          Main application
@@ -52,11 +51,13 @@
 uint8_t rx_buffer[1000];
 uint8_t value = 0;
 
+/*
+                         Main application
+ */
 void main(void)
 {
     // Initialize the device
     SYSTEM_Initialize();
-    
 
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global Interrupts
@@ -67,16 +68,13 @@ void main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
-    
-   
     LIDAR_Init();
-    __delay_ms(20);
-    LED_Off();
-    Nop();
     while (1)
     {
+        __delay_ms(1000);
+        value = rx_buffer[0];
+        //LIDAR_StopScan();
         Nop();
-        
     }
 }
 /**

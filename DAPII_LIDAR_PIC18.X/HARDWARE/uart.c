@@ -1,19 +1,19 @@
-#include <xc.h>
 #include "uart.h"
-#include "ISR.h"
 
-#define BAUD_230400 25
+#define BAUD_230400 67
 #define BAUD_57600 103
 #define PINB1 0b001001
 #define PINC4 0b010100
 #define U1TX  0x20
 #define U2TX  0x23
 
+#define INIT_LENGTH 7
+
 //Counter to increment buffers
 uint16_t count = 0;
 
 //Used to check that the data size can be calculated
-uint8_t data_ready = 0;
+bool data_ready = false;
 
 //Used buffers
 uint8_t rx_buffer[1000];
@@ -23,7 +23,12 @@ uint8_t tmp_buffer[1000];
 uint16_t data_size = 0;
 
 //Allows the read function to be called
-uint8_t clear_to_read = 0;
+bool clear_to_read = false;
+
+//Checks if the initialization answer has been sent from the LIDAR
+bool init_ok = false;
+
+static Init_Function Device_Init_Function = NULL;
 
 void UART_SetBaudrate(uint8_t port, uint8_t value){
     
@@ -92,35 +97,40 @@ void UART_Write(uint8_t port, uint8_t * buf, uint8_t buf_size){
 
 void UART_Rx_Callback_Function(void){
    
-    if (!data_ready){
-            
-            if (count == 3){
-                tmp_buffer[3] = U1RXB;
-                data_ready = 1;
-            } else {
-                tmp_buffer[count] = U1RXB;
-                count++;
-            }
-            
-        } else {
-            
-            if (count == 4){
-                data_size = tmp_buffer[3]*4 + 10;
-            }
-            if (count == data_size){
-                for (uint16_t index; index < data_size; index++){
-                    rx_buffer[index] = tmp_buffer[index];
+    static uint8_t receive_state, checksum;
+    uint8_t tmp = U2RXB;
+    tmp_buffer[count] = tmp;
+    
+    if (init_ok == false){ //If the initialization of the LIDAR hasn't been done yet
+        
+        switch(receive_state){
+            case 0:
+                if(tmp_buffer[0] == 0xA5 && tmp_buffer[1] == 0x5A){
+                    receive_state++;
                 }
-                data_ready = 0;
-                count = 0;
-                if (clear_to_read == 0){
-                    clear_to_read = 1;
-                }
-            } else {
-                tmp_buffer[count] = U1RXB;
                 count++;
-            }
-        }
+                break;
+                
+            case 1:
+                //Check that the init was done properly
+                if(count == INIT_LENGTH && tmp_buffer[INIT_LENGTH - 1] == 0x81){
+                    init_ok = true;
+                    count = 0;
+                } else if (count == INIT_LENGTH){
+                    Device_Init_Function();
+                    count = 0;
+                } else {
+                    count++;
+                }
+                break;
+        }   
+        
+    } else {
+        
+        
+        
+    }
+    
 }
 
 void UART_Init(void){
@@ -160,16 +170,16 @@ void UART_Init(void){
     //Configure Uart2 RX on RB1
     ANSELBbits.ANSELB1=0;
     TRISBbits.TRISB1=1;
-    U1RXPPS=PINB1;
+    U2RXPPS=PINB1;
     
     //Set baudrate
     UART_SetBaudrate(1,BAUD_230400);
-    UART_SetBaudrate(1,BAUD_230400);
+    UART_SetBaudrate(2,BAUD_230400);
     
     // Disable interrupts before changing states
     INTCON0bits.GIEH = 1; // Enables global interrupts
-    PIE4bits.U1IE = 1;    // Enables UART interruptions
-    PIE4bits.U1RXIE = 1;  // Enables interrupts on RX
+    PIE8bits.U2IE = 1;    // Enables UART interruptions
+    PIE8bits.U2RXIE = 1;  // Enables interrupts on RX
     
     //Enable both UART
     UART_Enable();
@@ -188,5 +198,18 @@ void UART_Read(uint8_t * buffer){
         }
         
     }
+    
+}
+
+uint8_t DEVICE_Set_Init(const Init_Function Function){
+    
+    uint8_t handlerSet = 0;
+    // On vérifie toujours les paramètres en entrée d'une fonction publique:
+    if(Function != NULL)
+    {
+        Device_Init_Function = (Init_Function)Function;
+        handlerSet = 1;
+    }
+    return handlerSet;
     
 }
