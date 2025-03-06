@@ -41,15 +41,20 @@
     SOFTWARE.
 */
 #include <xc.h>
+#include "../APPLICATION/AppManager.h"
 #include "../HARDWARE/mcc.h"
 #include "../DRIVERS/lidar.h"
 #include "../HARDWARE/uart.h"
 #include "../HARDWARE/LED.h"
+#include "../HARDWARE/pwm.h"
+#include "../DRIVERS/motors.h"
+#include "../HARDWARE/ISR.h"
+#include "../APPLICATION/timer.h"
 
 /*
                          Main application
  */
-uint8_t rx_buffer[1000];
+uint8_t rx_buffer_tab[1000];
 uint8_t value = 0;
 
 void main(void)
@@ -67,16 +72,13 @@ void main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
-    
-   
-    LIDAR_Init();
-    __delay_ms(20);
-    LED_Off();
-    Nop();
+    TMR0_Initialize();
+    Interrupts_Init();
+    PWM_Init();
+    APP_Init();
     while (1)
     {
-        Nop();
-        
+        APP_Run();
     }
 }
 /**

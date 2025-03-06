@@ -12,6 +12,9 @@
       <itemPath>HARDWARE/LED.h</itemPath>
       <itemPath>APPLICATION/AppManager.h</itemPath>
       <itemPath>HARDWARE/pin_manager.h</itemPath>
+      <itemPath>HARDWARE/pwm.h</itemPath>
+      <itemPath>DRIVERS/motors.h</itemPath>
+      <itemPath>APPLICATION/timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -29,6 +32,9 @@
       <itemPath>HARDWARE/LED.c</itemPath>
       <itemPath>APPLICATION/AppManager.c</itemPath>
       <itemPath>HARDWARE/pin_manager.c</itemPath>
+      <itemPath>HARDWARE/pwm.c</itemPath>
+      <itemPath>DRIVERS/motors.c</itemPath>
+      <itemPath>APPLICATION/timer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -7,6 +7,8 @@
 #define U1TX  0x20
 #define U2TX  0x23
 
+#define MAX_RX_SIZE 170
+
 #define INIT_LENGTH 7
 
 //Counter to increment buffers
@@ -16,8 +18,8 @@ uint16_t count = 0;
 bool data_ready = false;
 
 //Used buffers
-uint8_t rx_buffer[1000];
-uint8_t tmp_buffer[1000];
+uint8_t rx_buffer[MAX_RX_SIZE];
+uint8_t tmp_buffer[MAX_RX_SIZE];
 
 //Size of useful data in bytes
 uint16_t data_size = 0;
@@ -115,9 +117,12 @@ void UART_Rx_Callback_Function(void){
                 //Check that the init was done properly
                 if(count == INIT_LENGTH && tmp_buffer[INIT_LENGTH - 1] == 0x81){
                     init_ok = true;
+                    receive_state = 0;
                     count = 0;
                 } else if (count == INIT_LENGTH){
                     Device_Init_Function();
+                    receive_state = 0;
+                    init_ok = 0;
                     count = 0;
                 } else {
                     count++;
@@ -127,7 +132,35 @@ void UART_Rx_Callback_Function(void){
         
     } else {
         
-        
+        switch (receive_state){
+            
+            case 0: //Packet header
+                if(tmp_buffer[0] == 0xAA && tmp_buffer[1] == 0x55){
+                    receive_state++;
+                }
+                count++;            
+                break;
+                
+            case 1: //Packet info
+                if (count == 3){
+                    data_size = 10 + 2*tmp_buffer[count];
+                    receive_state++;
+                }
+                count++;
+                break;
+            case 2:
+                if (count == data_size){
+                    count = 0;
+                    for (uint8_t index = 0; index < data_size; index++){
+                        rx_buffer[index] = tmp_buffer[index];
+                    }
+                    count = 0;
+                    receive_state = 0;
+                } else {
+                    count++;
+                }
+                break;
+        }   
         
     }
     
@@ -162,10 +195,10 @@ void UART_Init(void){
     TRISCbits.TRISC4=1;
     U1RXPPS=PINC4;
     
-    //Configure Uart2 TX on RB2
-    ANSELBbits.ANSELB2 = 0;
-    TRISBbits.TRISB2= 0;
-    RB2PPS=U2TX;
+    //Configure Uart2 TX on RB0
+    ANSELBbits.ANSELB0 = 0;
+    TRISBbits.TRISB0= 0;
+    RB0PPS=U2TX;
     
     //Configure Uart2 RX on RB1
     ANSELBbits.ANSELB1=0;
